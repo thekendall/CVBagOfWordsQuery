@@ -20,20 +20,24 @@ fnames = dir([siftdir '/*.mat']);
 
 fprintf('reading %d total files...\n', length(fnames));
 
+
 N = 50;  % to visualize a sparser set of the features
+indices = randsample(length(fnames),N)
+
 %% SIFT Description Matrix
 
 siftMatrix = [];
 % Loop through data files to create an array of descriptors.
 for i=1:N
 
-    fprintf('reading frame %d of %d\n', i, length(fnames));
+    %fprintf('reading frame %d of %d\n', i, length(fnames));
     % load that file
-    fname = [siftdir '/' fnames(i).name];
+    fname = [siftdir '/' fnames(indices(i)).name];
     load(fname, 'descriptors');
     siftMatrix = horzcat(siftMatrix,descriptors');
 end
 fprintf('Calculating kmeans');
 
 [membership,means,rms] = kmeansML(1500, siftMatrix);
+
 
