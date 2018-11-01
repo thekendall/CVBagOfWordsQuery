@@ -58,6 +58,7 @@ for i=1:N
         patch = getPatchFromSIFTParameters(positions(word1(a),:), scales(word1(a)), orients(word1(a)), im);
         patchResize = imresize(patch,[100,100]);
         patch_row = horzcat(patch_row, patchResize);
+        % Stolen from thekendall github
         
         word_count = word_count+1;
         if size(patch_row,2) == 520;
